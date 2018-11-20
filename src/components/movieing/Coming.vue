@@ -32,10 +32,6 @@
         <div class="btn" v-if="item.globalReleased">购票</div>
         <div class='btn comingbtn' v-else>预售</div>
          </li>
-       
-
-
-            
         </ul>
     </div>
 
@@ -48,7 +44,8 @@
 //引入过滤器，可以自定义各种组件
 import '../../utils/filter'
 import { getComingList,getMostExpectedData,getmorecoming } from "../../fuwu/moviefuwu.js";
-
+// 使用vuex管理全局数据。
+import {mapState} from 'vuex'
 export default {
 data(){
         return {
@@ -57,16 +54,22 @@ data(){
             comingIDS:{},    
             canLoadMore: true,
             comingmore:[]    
-            
         }
     },
-methods:{
+    computed:{
+        ...mapState(['cityID'])   
+    },
+     watch: {
+        cityID(){
+            console.log('id变了')
+          this.initdata()
+        }
+    },
+    methods:{
     // 加载更多数据
     loadMoreData(){
         console.log('需要加载更多数据')
             this.canLoadMore = false;
-        
-          
     //     // 取得要加载的数据ids
         let ids = [...this.comingIDS];        
         // console.log( this.comingmore.length)
@@ -90,21 +93,26 @@ methods:{
                 }
     })
         
-    }
-},
-created(){
-     getComingList().then(({
+    },
+    initdata(){
+     getComingList(this.cityID).then(({
          data, ids,newData
      })=>{
             this.comingMap =data;
             this.comingIDS =ids
             this.comingmore = newData
         })
-     getMostExpectedData().then(result =>{
+     getMostExpectedData(this.cityID).then(result =>{
         this.expectedList = result;
     })
-}
+    }
     
+},
+
+created(){
+    this.initdata()
+}
+     
 };
 </script>
 

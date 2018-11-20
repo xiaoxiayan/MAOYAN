@@ -36,6 +36,18 @@ const COMING_API = '/ajax/comingList'
 
 const FIND_API = '/ajax/search'
 
+//影院的数据接口
+// 参数 day=2018-11-19  时间
+//      limit=20   数据
+//      cityId=30  城市代号
+
+const CINEMAS_API = '/ajax/cinemaList'
+
+/*
+城市列表接口
+*/
+const CITY_LIST_API = '/dianying/cities.json';
+
 export default 
 {
     SAT_HOST,
@@ -43,7 +55,9 @@ export default
     MORE_PLAYING_API,
     COMING_API,
     MOST_EXPECTED_API,
-    FIND_API
+    FIND_API,
+    CINEMAS_API,
+    CITY_LIST_API
 
 
 }

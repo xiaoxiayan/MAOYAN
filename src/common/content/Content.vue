@@ -15,6 +15,10 @@ export default {
     methods: {
         refresh(){
             this.contentScroll.refresh();
+        },
+        scrollTo(y){
+            this.contentScroll.refresh();
+            this.contentScroll.scrollTo(0, y*(-1), 200);
         }
     },
     mounted(){

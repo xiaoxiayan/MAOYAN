@@ -70,13 +70,13 @@ export function getMorePlayingList(ids){
 }
 
 //请求即将上映的参数
-export function getComingList(){
+export function getComingList(ci){
     return new Promise((resolve, reject)=>{
         http({
             url: API.COMING_API,
             method: 'GET',
             data: {
-               ci:30, //城市代号
+               ci, //城市代号
                token:'',
             //    limit:10,
             //    movieIds:1212293
@@ -118,13 +118,13 @@ export function getComingList(){
 }
 
 // 请求最受期待的电影数据
-export function getMostExpectedData(){
+export function getMostExpectedData(ci){
     return new Promise((resolve, reject)=>{
         http({
             url: API.MOST_EXPECTED_API,
             method: 'GET',
             data: {
-                ci: 30,
+                ci,
                 limit: 10,
                 offset: 0,
                 token: ''

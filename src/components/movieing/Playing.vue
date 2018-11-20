@@ -25,7 +25,6 @@
 <script>
 // 引入加载数据和加载更多功能
 import { getPlayingList,getMorePlayingList } from "../../fuwu/moviefuwu.js";
-
 export default {
 data(){
     return{
@@ -37,9 +36,7 @@ data(){
 methods:{
     // 加载更多数据
     loadMoreData(){
-        console.log('需要加载更多数据')
             this.canLoadMore = false;
-        console.log(this.playingIDS)
         // 取得要加载的数据ids
         let ids = [...this.playingIDS];
         // 加载的数据是后10条
@@ -47,8 +44,7 @@ methods:{
         let movieId = ids.join(',')
         // 刷新加载数据，加载完成之前不给再发送请求
          this.canLoadMore = false;
-        
-            // 执行加载更多数据的函数
+        // 执行加载更多数据的函数
     getMorePlayingList(movieId).then(result => {
         this.playingList = [...this.playingList, ...result];
          if(this.playingList.length >= this.playingIDS.length){

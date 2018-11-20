@@ -5,7 +5,8 @@ import Movie from '../pages/movie/movie.vue'
 import Cinema from '../pages/cinema/cinema.vue'
 import Mine from '../pages/mine/mine.vue'
 import Find from '../pages/common/find.vue'
-import CityList from '../pages/common/cityList.vue'
+import CityList from '../pages/common/CityList'
+
 
 Vue.use(Router)
 

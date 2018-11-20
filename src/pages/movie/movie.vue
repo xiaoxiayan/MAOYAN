@@ -3,8 +3,8 @@
 <div class="page" id  = 'movie'>        
 <app-header title="猪儿虫"></app-header>
     <header class="sub-header">
-        <span class="city-icon">
-            深圳
+        <span class="city-icon" @click="chooseCity()">
+                {{city}}
         </span>
         <nav class="nav">
             <li v-for="(navItem, index) in navList" :key="index"
@@ -32,6 +32,9 @@
 // 引入子组件
 import playing from '../../components/movieing/Playing'
 import Coming from '../../components/movieing/Coming'
+//使用VUEX管理城市列表数据
+import {mapState} from 'vuex'
+
 //获取数据，引入操作数据的文件
 export default {
    components: {
@@ -45,6 +48,9 @@ export default {
     
     };
   },
+   computed: {
+        ...mapState(['city'])
+    },
   methods: {
     navAction(index) {
       this.navIndex = index;
@@ -53,6 +59,11 @@ export default {
     toFind(){
       console.log(11)
       this.$router.push('/movie/find')
+    },
+    //进入城市
+    chooseCity(){
+      console.log(1111)
+        this.$router.push('movie/cityList')
     }
   },
  
