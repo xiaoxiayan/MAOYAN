@@ -5,10 +5,14 @@
         <p class="title">近期最受期待</p>
         <h-scroll class="expected-list">
             <li  class="expected-item" v-for="item in expectedList" :key="item.id"> 
+                <div class="imgAndwant">
                 <img :src="item.img | replaceWH(85, 115)"/>
                 <p class="wantlook">
                     {{item.wish}}人想看
                 </p>
+                </div>
+                <p class="movieName">{{item.nm}}</p>
+                <p class='movieTime'>{{item.comingTitle}}</p>
 
             </li>
         </h-scroll>
@@ -127,20 +131,32 @@ created(){
         display: inline-block;
         overflow: hidden;
         margin-right: 12px;
-        // position: relative;
-        img{
+        height: 161px;
         width: 85px;
+        .imgAndwant{
+        position: relative;
+        img{
+         width: 85px;
         height: 115px;
-        width: 100%;
-        // position: relative;
         }
         .wantlook{
             font-weight: 700;
             font-size: 12px;
             color:rgb(250, 175, 0);
-            // position: absolute;  
+            position: absolute;  
             z-index: 10;
+            bottom: 0px;
         }
+        }
+        .movieName{
+            font-weight: 700;
+            margin-bottom: 3px;
+            font-size: 13px;
+             white-space:nowrap;
+             overflow:hidden;
+            text-overflow:ellipsis;
+        }
+      
     }
 }
 .wantLook-day{

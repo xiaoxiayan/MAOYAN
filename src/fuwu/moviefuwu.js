@@ -48,15 +48,13 @@ export function getMorePlayingList(ids){
             }
         })
         .then(({data,status})=>{
-              
             //数据有限，所以会出现请求失败
             if(status !=200){
                 return
             }
-            // console.log(data);
             let newData = data.coming.map(item =>{
                 let {id, nm, img, version, sc, star, showInfo, globalReleased,wish} = item;
-                img = img   .replace(/w.h/, '128.180');
+                img = img.replace(/w.h/, '128.180');
                 return {id, nm, img, version, sc, star, showInfo, globalReleased,wish};
             })
             resolve(newData);

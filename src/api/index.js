@@ -48,6 +48,18 @@ const CINEMAS_API = '/ajax/cinemaList'
 */
 const CITY_LIST_API = '/dianying/cities.json';
 
+
+// 获取全城，品牌，特色的接口
+// 参数: ci=1
+
+const SETCITY_BRAND_API = '/ajax/filterCinemas'
+
+/*
+获取特色厅数据
+参数 ci=30
+*/
+const GET_TST_API = '/ajax/filterCinemas'
+
 export default 
 {
     SAT_HOST,
@@ -57,7 +69,9 @@ export default
     MOST_EXPECTED_API,
     FIND_API,
     CINEMAS_API,
-    CITY_LIST_API
+    CITY_LIST_API,
+    SETCITY_BRAND_API,
+    GET_TST_API
 
 
 }

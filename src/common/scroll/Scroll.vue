@@ -11,7 +11,7 @@ export default {
     name: 'h-scroll',
     data(){
         return {
-            width: 0
+            width: null
         }
     },
     mounted(){
@@ -24,8 +24,7 @@ export default {
         scroll.on('beforeScrollStart', ()=>{
             let width = 0;
             this.$slots.default.map(item=>{
-                console.log(item.elm.offsetWidth);
-                width += item.elm.offsetWidth;
+                width += item.elm.offsetWidth + 12;
             })
             this.width = width;
             scroll.refresh();

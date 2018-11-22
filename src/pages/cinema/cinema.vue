@@ -6,13 +6,13 @@
         <span class="city-icon" @click="chooseCity()">
                 {{city}}              
         </span>
-       <input type="text" name="" id=""  placeholder="搜影院">
-       <div></div>
+        <div class="find">  <span>搜影院</span></div>
+       
     </header>
    <div class="choose">
-            <div class="CC">全城</div>
-            <div class="CC">品牌</div>
-            <div class="CC">特色</div> 
+            <div class="CC" @click="CityAction()">全城</div>
+            <div class="CC" @click="BrandAction()">品牌</div>
+            <div class="CC" @click="TcAction()">特色</div> 
     </div> 
     <app-content>
         <ul>
@@ -31,11 +31,12 @@
         </ul>
     </app-content>
     </div> 
+    <router-view></router-view>
 </div>
 </template>
 
 <script>
-import { getcinemas } from "../../fuwu/cinemasfuwu.js";
+import { getcinemas,setCityAndBrandAndService,getServiceData } from "../../fuwu/cinemasfuwu.js";
 import {mapState} from 'vuex'
 
 export default {
@@ -50,7 +51,8 @@ export default {
   watch:{
       cityID(){
         initData()
-      }
+      },
+      
   },
   methods:{
       initData(){
@@ -59,8 +61,24 @@ export default {
            });
       },
       chooseCity(){
-        this.$router.push('cinemas/cityList')
-      }
+        console.log('选择了城市')
+        this.$router.push('/cinema/cityList')
+      },
+      CityAction(){
+        console.log('全城');
+        this.$router.push('/cinema/setCom')
+        
+      },
+      BrandAction(){
+        console.log('品牌')
+        this.$router.push('/cinema/brandCom')
+        
+      },
+      TcAction(){
+        console.log('特色')
+        this.$router.push('/cinema/serviceCom')
+        
+      } 
   },
 
   created() {
@@ -81,6 +99,19 @@ export default {
   font-size: 14px;
   display: flex;
   justify-content: space-around;
+  .find{
+    width: 60%;
+    margin-top:5px;
+    align-items: center;
+    height: 28px;
+    font-size: 13px;
+    color: #b2b2b2;
+    margin-left: 18px;
+    border: .5px solid #e6e6e6;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 28px;
+  }
   .city-icon {
     // flex: 1;
     text-align: center;
