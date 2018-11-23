@@ -17,12 +17,14 @@ export function getPlayingList(){
                 //请求失败
                 return;
             }
+            console.log(data)
             //请求成功
             let newData = data.movieList.map(item=>{
                 let {id, nm, img, version, sc, star, showInfo, globalReleased,wish,rt} = item;
                 img = img.replace(/w.h/, '128.180');
                 return {id, nm, img, version, sc, star, showInfo, globalReleased,wish,rt};
             })
+         
             //返回参数以及ID，用来加载更多的数据
             resolve({
                 data: newData,

@@ -62,9 +62,10 @@ const GET_TST_API = '/ajax/filterCinemas'
 
 /*
 获取电影详情
-http://m.maoyan.com/ajax/detailmovie?movieId=341213
+参数，电影ID 
+movieId=341213
 */ 
-
+const GET_MOVIEDETAILS_API = '/ajax/detailmovie'
 
 export default 
 {
@@ -77,7 +78,8 @@ export default
     CINEMAS_API,
     CITY_LIST_API,
     SETCITY_BRAND_API,
-    GET_TST_API
+    GET_TST_API,
+    GET_MOVIEDETAILS_API
 
 
 }

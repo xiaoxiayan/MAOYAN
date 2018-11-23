@@ -9,8 +9,7 @@
 </template>
 
 <script>
-import { getPlayingList,getMorePlayingList } from "../../fuwu/moviefuwu.js";
-
+import { getMovieDetails } from "../../fuwu/movieDetailsfuwu.js";
 export default {
     data(){
         return{
@@ -27,6 +26,7 @@ export default {
         console.log(this.$route.params)
         this.title = this.$route.params.name
         this.id = this.$route.params.id
+        getMovieDetails(this.id)
     }
    
 }
