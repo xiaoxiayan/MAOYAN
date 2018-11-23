@@ -60,6 +60,12 @@ const SETCITY_BRAND_API = '/ajax/filterCinemas'
 */
 const GET_TST_API = '/ajax/filterCinemas'
 
+/*
+获取电影详情
+http://m.maoyan.com/ajax/detailmovie?movieId=341213
+*/ 
+
+
 export default 
 {
     SAT_HOST,

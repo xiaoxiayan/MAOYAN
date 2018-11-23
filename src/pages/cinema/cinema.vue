@@ -6,17 +6,20 @@
         <span class="city-icon" @click="chooseCity()">
                 {{city}}              
         </span>
-        <div class="find">  <span>搜影院</span></div>
+        <div class="find"><span>搜影院</span></div>
        
     </header>
    <div class="choose">
-            <div class="CC" @click="CityAction()">全城</div>
-            <div class="CC" @click="BrandAction()">品牌</div>
-            <div class="CC" @click="TcAction()">特色</div> 
+    <div v-for='(item,index) in choose' 
+    :key = index  
+    :class="{active: navIndex==index}" 
+    class="CC" 
+    @click="CityAction(index)"
+    >{{item}}</div>
     </div> 
     <app-content>
         <ul>
-          <li v-for="item in cinemasList" :key = item.id>
+          <li v-for="item in cinemasList" :key = item.id @click='IntoMovie()'>
               <div class="title">
                 <span>{{item.nm}}</span>
                 <span>{{item.sellPrice}}</span>
@@ -26,23 +29,36 @@
                   <span> {{item.addr}} </span>
                     <span> {{item.distance}} </span>
               </div>
-
           </li>
         </ul>
     </app-content>
-    </div> 
-    <router-view></router-view>
+    </div>  
+    <setCom  v-show="navIndex == 0"/>
+    <BrandCom v-show="navIndex == 1"/>
+    <ServiceCom v-show="navIndex == 2"/>
 </div>
 </template>
 
 <script>
-import { getcinemas,setCityAndBrandAndService,getServiceData } from "../../fuwu/cinemasfuwu.js";
+import {getcinemas,setCityAndBrandAndService,getServiceData} from "../../fuwu/cinemasfuwu.js";
 import {mapState} from 'vuex'
+import BrandCom from '../../components/cinemaSetCom/brandCom'
+import ServiceCom from '../../components/cinemaSetCom/serviceCom'
+import SetCom from '../../components/cinemaSetCom/setCom.vue'
 
 export default {
+  components:{
+    'setCom':SetCom,
+    'BrandCom':BrandCom,
+    'ServiceCom':ServiceCom
+  },
   data() {
     return {
-      cinemasList: []
+      choose:['全城','品牌','特色'],
+      cinemasList: [],
+      isshow:false,
+      navIndex : null,
+      sIndex : ''
     };
   },
   computed: {
@@ -52,6 +68,7 @@ export default {
       cityID(){
         initData()
       },
+     
       
   },
   methods:{
@@ -64,26 +81,35 @@ export default {
         console.log('选择了城市')
         this.$router.push('/cinema/cityList')
       },
-      CityAction(){
-        console.log('全城');
-        this.$router.push('/cinema/setCom')
-        
+      CityAction(index){
+        console.log(index);
+        if (this.navIndex != index ){
+          this.navIndex = index
+          this.sIndex = index
+        }else{
+          this.navIndex = null
+          this.sIndex = ''   
+        }
       },
-      BrandAction(){
-        console.log('品牌')
-        this.$router.push('/cinema/brandCom')
-        
-      },
-      TcAction(){
-        console.log('特色')
-        this.$router.push('/cinema/serviceCom')
-        
-      } 
+     IntoMovie(){
+            console.log('点解了')
+            this.$router.push('./MovieDetails')
+    }
+      
+      
   },
-
   created() {
      this.initData()
+     this.$center.$on('close',(data)=>{
+       console.log('监听到了',data)
+       this.navIndex = data
+     })
+     this.$center.$on('setCity',(data)  => {
+       console.log(data)
+       this.choose.splice(this.sIndex,1,data)
+     })
   }
+   
 };
 </script>
 

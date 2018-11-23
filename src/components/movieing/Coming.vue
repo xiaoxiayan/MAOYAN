@@ -4,7 +4,7 @@
     <div class="expected">
         <p class="title">近期最受期待</p>
         <h-scroll class="expected-list">
-            <li  class="expected-item" v-for="item in expectedList" :key="item.id"> 
+            <li  class="expected-item" v-for="item in expectedList" :key="item.id" @click="IntoMovie()"> 
                 <div class="imgAndwant">
                 <img :src="item.img | replaceWH(85, 115)"/>
                 <p class="wantlook">
@@ -20,7 +20,7 @@
     <div v-for="(list, key) in comingMap" :key="key">
         <p class="wantLook-day">{{key}}</p>
         <ul>
-            <li v-for="item in list" :key="item.id" class="coming-item">
+            <li v-for="item in list" :key="item.id" class="coming-item" @click="IntoMovie()">
                  <div class="item-img">
                      <img :src="item.img"/>
                 </div>
@@ -96,7 +96,6 @@ data(){
                     this.canLoadMore = true;
                 }
     })
-        
     },
     initdata(){
      getComingList(this.cityID).then(({
@@ -109,8 +108,11 @@ data(){
      getMostExpectedData(this.cityID).then(result =>{
         this.expectedList = result;
     })
+    },
+    IntoMovie(){
+            console.log('点解了')
+            this.$router.push('./MovieDetails')
     }
-    
 },
 
 created(){

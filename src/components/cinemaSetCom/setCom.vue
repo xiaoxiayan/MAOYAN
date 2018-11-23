@@ -13,8 +13,6 @@
                     <li  v-if="selectIndex == 1" v-for="(item, index) in subwayList" :key="index" class="leftItem" :class="{selectedLeft:index == leftIndex}"  @click="selectLeftActive(index)">
                         <span class="name">{{item.name}}</span><span>({{item.count}})</span>
                     </li>
-
-
                 </div>
                 <div class="right">
                     <li v-if="selectIndex == 0" class="rightItem" :class="{selectedRight:index == rightIndex}" v-for="(item, index) in rightDistrictList.subItems" :key="index" @click="selectRightActive(index)">
@@ -44,14 +42,9 @@ export default {
             districtList: [],
             subwayList: [],
             leftIndex:0,
-
             rightDistrictList:[],
             rightSubwayList:[],
             rightIndex:0,
-
-            // isShow: true
-
-            
         }
     },
      computed:{
@@ -60,32 +53,31 @@ export default {
     },
     methods:{
         tabSelect(index) {
-            // console.log(index);
+            console.log(index)
             this.selectIndex = index;
             this.rightIndex = 0;
             this.leftIndex = 0;
             this.rightDistrictList = [];
             this.rightSubwayList = [];
+            console.log(index)
+            
         },
-
+        //选择全城-商区列表
         selectLeftActive(index){
-            // console.log(index);
+            console.log('全城-商区',index)
             this.leftIndex = index;
-            // console.log(this.districtList[index].name);
             this.rightDistrictList = this.districtList[index];
             this.rightSubwayList = this.subwayList[index];
-            // console.log(this.rightSubwayList.subItems);
             this.rightIndex = 0;
         },
-
+        //选择全城-商区-具体地址
         selectRightActive(index){
+            console.log('全城-商区-具体地址',index)
             this.rightIndex = index;
-            // console.log(this.rightDistrictList.subItems[index].name);
             setTimeout(()=>{
                 this.$center.$emit('close','null');
                 this.$center.$emit('setCity',this.rightDistrictList.subItems[index].name);
             },200)
-            // this.isShow = false;
         }
     },
     watch:{
@@ -93,17 +85,11 @@ export default {
             this.rightDistrictList = [];
             this.rightSubwayList = [];
             setCityAndBrandAndService(this.cityID).then(({brand,district,service,subway,timeRanges})=>{
-                // this.brandList = brand.subItems;
                 this.districtList = district.subItems;
-                // this.serviceList = service.subItems;
                 this.subwayList = subway.subItems;
-                // this.timeRangesList = timeRanges.subItems;
                 this.rightIndex = 0;
                 this.leftIndex = 0;
 
-                // console.log(this.brandList, this.districtList, this.serviceList, this.subwayList, this.timeRangesList);
-                // console.log(this.districtList);
-                // console.log(typeof this.districtList);
             })
         }
     },
@@ -114,10 +100,7 @@ export default {
             this.serviceList = service.subItems;
             this.subwayList = subway.subItems;
             this.timeRangesList = timeRanges.subItems;
-            // console.log(this.brandList, this.districtList, this.serviceList, this.subwayList, this.timeRangesList);
-            // console.log(this.districtList);
-            // console.log(typeof this.districtList);
-            // console.log(district.subItems[1].subItems);
+           
         })
     }
 }
@@ -125,6 +108,7 @@ export default {
 
 <style lang="scss">
 .con{
+    top:23.3%;
     width: 100%;
     height: 76.7%;
     position: absolute;
@@ -190,7 +174,6 @@ export default {
                 background: #f5f5f5;
                 padding:0 10px;
                 .rightItem{
-                    width: 100%;
                     height: 40px;
                     line-height: 40px;
                     padding-left: 20px;

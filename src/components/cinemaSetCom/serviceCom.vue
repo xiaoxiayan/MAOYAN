@@ -32,11 +32,9 @@ export default {
             serviceList: [],
             timeRangesList: [],
             topIndex:0,
-
             bottomIndex:0,
             tstName:'',
             tstList:[],
-
             isShow:true
         }
     },
@@ -79,10 +77,8 @@ export default {
             // console.log(brand,district,service,subway,timeRanges);
         }),
         getServiceData(this.cityID).then((data)=>{
-            console.log(data);
             this.tstName = data.name;
             this.tstList = data.subItems;
-            console.log(this.tstList)
         })
         
     }
@@ -91,6 +87,8 @@ export default {
 
 <style lang="scss" scoped>
 .Service{
+    top:23.3%;
+    
     width: 100%;
     height: 76.7%;
     position: absolute;

@@ -1,7 +1,7 @@
 <template>
 <app-content :style="{top: '88px', bottom: '49px'}" @loadmore="loadMoreData" :canLoadMore="canLoadMore" >
 <ul class="playing">
-    <li class="playing-item" v-for="item in playingList" :key="item.id">
+    <li class="playing-item" v-for="item in playingList" :key="item.id"  @click="IntoMovie({name:item.nm,id:item.id,rt:item.rt})" >
         <div class="item-img">
             <img :src="item.img"/>
         </div>
@@ -54,9 +54,12 @@ methods:{
                     //还可以继续加载
                     this.canLoadMore = true;
                 }
-    })
-        
+    })  
+    },
+    IntoMovie(data){
+         this.$router.push({name:'MovieDetails',params:data})
     }
+
 },
 created(){
         //初始化请求数据

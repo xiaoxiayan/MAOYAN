@@ -6,9 +6,7 @@ import Cinema from '../pages/cinema/cinema.vue'
 import Mine from '../pages/mine/mine.vue'
 import Find from '../pages/common/find.vue'
 import CityList from '../pages/common/CityList'
-import BrandCom from '../components/cinemaSetCom/brandCom'
-import ServiceCom from '../components/cinemaSetCom/serviceCom'
-import SetCom from '../components/cinemaSetCom/setCom.vue'
+// import MovieDetails from '../pages/common/MovieDetails.vue'
 
 
 
@@ -49,20 +47,9 @@ export default new Router({
         {
           path: 'cityList',
           component: CityList
+          
         },
-        {
-          path:"brandCom",
-          component:BrandCom
-        },
-        {
-          path:'serviceCom',
-          component:ServiceCom
-        },
-        {
-          path:'setCom',
-          component:SetCom
-
-        }
+       
       ]
     },
     {
@@ -70,8 +57,14 @@ export default new Router({
       component: Mine
     },
     {
+      name:'MovieDetails',
+      path:'/movieDetails/:name/:id',
+      //懒加载
+      component:()=> import('../pages/common/MovieDetails.vue')
+    },
+    {
       path: '**',
       redirect: '/movie'
-    }
+    },
   ]
 })

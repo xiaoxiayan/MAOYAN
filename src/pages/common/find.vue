@@ -6,12 +6,12 @@
         <div class="searchBox">
         <div class="search">
             <img src="../../assets/search.png" alt="">
-            <input type="text" name="" id="" placeholder="搜电影、搜影院" v-model="message" >
+            <input type="text" ref='value' placeholder="搜电影、搜影院"  @input="InputChange()">
         </div>
             <span class="cancel" @click="comback()">取消</span>
         </div>
         <!-- 搜索出来的内容 -->
-        <app-content :style="{top: '93px', bottom: '49px'}"  v-if="message">
+        <app-content :style="{top: '93px', bottom: '49px'}" v-if="message">
         <div class="type">电影/电视剧/综艺</div>
         <ul class="finding">
           <li class="finding-item" v-for="item in findList" :key="item.id">
@@ -62,7 +62,7 @@ import {searchMovie} from '../../fuwu/findfuwu.js';
 export default {
     data(){
         return{
-           message:'',
+           message:false,
            findList:[],
            cinemas:[],
            findListmore:'',
@@ -72,28 +72,76 @@ export default {
   methods: {
     comback() {
       this.$router.back();
+    },
+    InputChange(){ 
+      clearTimeout(this.timer)
+      this.timer = setTimeout(()=>{
+        if(this.$refs.value.value){
+          console.log(111)
+          return(new Promise((reslove,reject)=>{
+                 searchMovie(this.$refs.value.value)
+                 .then(result => {
+                   console.log(result)
+                    this.findList = result.obj.newData,
+                    this.cinemas =result.obj.DataCinemas,
+                    this.findListmore= result.obj.moreCinemas,
+                    this.cinemasmore = result.obj.moreMovies
+                    reslove()
+                 })
+          }).then(()=>{
+            if(this.$refs.value.value){
+               console.log(222)
+              this.message = true
+            }
+          })
+          )
+        }else{
+          console.log(333)
+              this.message = false
+        }
+       },200)
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //     if(this.$refs.value.value){
+  //             return(new Promise((reslove,reject)=>{
+  //              clearTimeout(this.timer)
+  //                this.timer=setTimeout(() => {
+  //           searchMovie(this.$refs.value.value).then(result=>{
+  //           this.findList = result.obj.newData,
+  //           this.cinemas =result.obj.DataCinemas,
+  //           this.findListmore= result.obj.moreCinemas,
+  //           this.cinemasmore = result.obj.moreMovies
+  //            reslove()
+  //       })
+  //       }, 500);
+        
+  //     }).then(()=>{
+  //       this.message = true
+  //     })
+  //   })
+  //   ) 
+  //    }
+  //    else{
+
+        
+  //     }
+  // }
+   
   },
-  watch:{
-    
-      message:function(){
-        setTimeout(() => {
-            searchMovie(this.message).then(result=>{
-            console.log(result)
-            this.findList = result.obj.newData,
-            this.cinemas =result.obj.DataCinemas,
-            this.findListmore= result.obj.moreCinemas,
-            this.cinemasmore = result.obj.moreMovies
-            console.log(this.findList)
-        })
-          
-        }, 500);
-      
-
-
-
-      }
-  },
+ 
 }
 </script>
 
@@ -120,7 +168,7 @@ export default {
       border-radius: 5px;
       background-color: #fff;
       img {
-         margin: 5px;
+        margin: 5px;
         width: 15px;
         height: 15px;
       }
@@ -138,69 +186,66 @@ export default {
       color: #f03d37;
     }
   }
-  .type{
+  .type {
     height: 40px;
-    font-weight:400;
-    color:#999;
+    font-weight: 400;
+    color: #999;
     margin-left: 12px;
     line-height: 40px;
     font-size: 14px;
   }
-  .finding{
+  .finding {
     width: 100%;
-    .finding-item{
-    box-sizing: border-box;
-    width: 100%;
-    padding: 12px;
-    border-top: 1px solid #e6e6e6;
-    // height: 103px;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-   .item-img{
-    margin-right: 10px;
-    width: 64px;
-    height: 90px;
-  
-    img{
-    width: 64px;
-    height: 90px;
+    .finding-item {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 12px;
+      border-top: 1px solid #e6e6e6;
+      // height: 103px;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      .item-img {
+        margin-right: 10px;
+        width: 64px;
+        height: 90px;
+
+        img {
+          width: 64px;
+          height: 90px;
+        }
+      }
+      .item-content {
+        width: 57%;
+
+        .nm {
+          font-weight: 700;
+          font-size: 17px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-bottom: 5px;
+        }
+        p {
+          margin-top: 2px;
+          font-size: 13px;
+          color: #666;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
     }
-    }
-    .item-content{
-     width: 57%;
-     
-    .nm{
-      font-weight: 700;
-      font-size: 17px;
-       white-space:nowrap;
-       overflow:hidden;
-       text-overflow:ellipsis;
-       margin-bottom:5px;
-    }
-    P{
-      margin-top: 2px;
-      font-size: 13px;
-      color: #666;
-      white-space:nowrap;
-       overflow:hidden;
-       text-overflow:ellipsis;
-    }
-    }
-   
-    }
-    .fen{
+    .fen {
       width: 20%;
       color: #fa0;
       font-size: 16px;
 
-      right:0;
-      span{
-      
-        font-size:10px ;
+      right: 0;
+      span {
+        font-size: 10px;
       }
     }
-
   }
 }
 </style>

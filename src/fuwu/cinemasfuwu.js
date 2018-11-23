@@ -72,7 +72,6 @@ export function getServiceData(id){
             if(status != 200){
                 return;
             }
-            console.log(data);
             resolve(data.hallType);
         })
         .catch((error)=>{

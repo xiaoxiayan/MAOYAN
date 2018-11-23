@@ -9,6 +9,10 @@ Vue.use(commonUi)
 
 Vue.config.productionTip = false
 
+var vm = new Vue()
+
+Vue.prototype.$center = vm
+
 new Vue({
   router,
   store,

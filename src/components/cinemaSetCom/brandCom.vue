@@ -26,8 +26,10 @@ export default {
     methods:{
         selectActive(index){
             this.selectIndex = index;
+            
             setTimeout(()=>{
                 this.$center.$emit('close','null');
+                this.$center.$emit('setCity',this.brandList[index].name);
             },200)
         }
     },
@@ -42,6 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 .Brand{
+    top:23.3%;
     width: 100%;
     height: 76.7%;
     position: absolute;
@@ -54,17 +57,17 @@ export default {
         overflow: auto;
         .BrandItem{
             width: 100%;
-            height: 0.4rem;
-            line-height: 0.4rem;
-            padding: 0 0.2rem;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 20px;
             border-bottom: 1px solid #ccc;
             &.active{
                 color: #f03d37;
                 &::before{
                     content: '√';
-                    margin-left: -0.1rem;
-                    margin-right: 0.05rem;
-                    font-size: 0.16rem;
+                    margin-left: -10px;
+                    margin-right: 5px;
+                    font-size: 16px;
                 }
             }
         }

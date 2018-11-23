@@ -34,7 +34,6 @@ import playing from '../../components/movieing/Playing'
 import Coming from '../../components/movieing/Coming'
 //使用VUEX管理城市列表数据
 import {mapState} from 'vuex'
-
 //获取数据，引入操作数据的文件
 export default {
    components: {
