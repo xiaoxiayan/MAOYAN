@@ -13,13 +13,10 @@ export function getMovieDetails(id) {
                 if(status != 200){
                     return;
                 }
-                let newData = Object.keys(data.detailMovie)
-                newData.map(item =>{
-                    let{id,img,cat,dra,photos,src,ver,snum,pubDesc,fra,dur,sc,enm} = item
-                    return{id,img,cat,dra,photos,src,ver,snum,pubDesc,fra,dur,sc,enm}
-                })
-                console.log(newData)
-                resolve(newData)
+                // let newData = {}
+                //     let{id,img,cat,dra,photos,src,ver,snum,pubDesc,fra,dur,sc,enm} = data
+                data = data.detailMovie
+                resolve(data)
         })
     })
   }

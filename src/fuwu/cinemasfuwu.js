@@ -19,6 +19,7 @@ export function getcinemas (cityId){
                         //请求失败
                         return
                         }
+                        console.log(data)
                         let newData = data.cinemas.map(item=>{
                             let {id,addr,distance,nm,sellPrice,hallType} =item
                             return {id,addr,distance,nm,sellPrice,hallType}
