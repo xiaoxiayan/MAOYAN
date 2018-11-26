@@ -13,34 +13,81 @@
                 <div class="details-right"> > </div>
             </div>
 
-
+              <div class="details-cinemas">
+                  <day></day>
+           <div class="choose">
+            <div v-for='(item,index) in choose' 
+            :key = index  
+            :class="{active: navIndex==index}" 
+            class="CC" 
+            @click="CityAction(index)"
+            >{{item}}</div>
+            </div> 
+              </div>
+      <setCom  v-show="navIndex == 0"/>
+                <BrandCom v-show="navIndex == 1"/>
+                <ServiceCom v-show="navIndex == 2"/>
    </div>
 </template>
 
 <script>
 import "../../utils/filter";
-import { getMovieDetails } from "../../fuwu/movieDetailsfuwu.js";
+import {mapState} from 'vuex'
+import day from './day'
+import BrandCom from '../../components/cinemaSetCom/brandCom'
+import ServiceCom from '../../components/cinemaSetCom/serviceCom'
+import SetCom from '../../components/cinemaSetCom/setCom.vue'
+
+import { getMovieDetails,movieDetailsCinemas } from "../../fuwu/movieDetailsfuwu.js";
 export default {
+  	components: {	
+      day,
+    'setCom':SetCom,
+    'BrandCom':BrandCom,
+    'ServiceCom':ServiceCom
+		},
   data() {
     return {
       title: "",
       id: "",
-      MovieData: {}
-    };
+      MovieData: {},
+      cinemas:{},
+      choose:['全城','品牌','特色'],
+      navIndex : null,
+      sIndex : ''
+      
+    }
   },
+   methods:{
+      CityAction(index){
+        console.log(index);
+        if (this.navIndex != index ){
+          this.navIndex = index
+          this.sIndex = index
+        }else{
+          this.navIndex = null
+          this.sIndex = ''   
+        }
+      }
+  },
+   computed:{
+        ...mapState(['cityID'])        
+    },
   methods: {
     comback() {
       this.$router.back();
     }
   },
   created() {
-    console.log(this.$route.params);
     this.title = this.$route.params.name;
     this.id = this.$route.params.id;
     getMovieDetails(this.id).then(result => {
       this.MovieData = result;
       console.log(this.MovieData)
     });
+    movieDetailsCinemas(this.cityID,this.id).then(result=>{
+        this.cinemas = result.cinemas
+    })
   }
 };
 </script>
@@ -50,7 +97,8 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 11;
-
+	position: absolute;
+  background-color: #fff;
   .details-box {
     display:flex;
     box-sizing: border-box;
@@ -93,9 +141,30 @@ export default {
         top: 50%;
         right:0;
         transform:translateY(-50%) 
-
     }
   }
+  .choose {
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  position: absolute;
+  top: 278px;
+  display: flex;
+  border-bottom: 1px solid #e6e6e6;
+  .CC {
+    width: 33%;
+       &::after {
+      content: "";
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-top: 6px solid #666;
+      transform: translateY(4px);
+    }
+  }
+}
 }
 </style>
 

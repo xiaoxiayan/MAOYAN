@@ -188,7 +188,7 @@ created(){
         justify-content: space-between;
        p{
             white-space:nowrap;
-             overflow:hidden;
+            overflow:hidden;
             text-overflow:ellipsis;
        }
        .title{ 

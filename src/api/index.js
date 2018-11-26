@@ -67,6 +67,12 @@ movieId=341213
 */ 
 const GET_MOVIEDETAILS_API = '/ajax/detailmovie'
 
+/*
+电影详情 影院
+forceUpdate=1543233192406 时间
+*/
+const MOVIEDETAILS_CINEMAS = '/ajax/movie'
+
 export default 
 {
     SAT_HOST,
@@ -79,7 +85,8 @@ export default
     CITY_LIST_API,
     SETCITY_BRAND_API,
     GET_TST_API,
-    GET_MOVIEDETAILS_API
+    GET_MOVIEDETAILS_API,
+    MOVIEDETAILS_CINEMAS
 
 
 }

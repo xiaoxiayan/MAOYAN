@@ -45,7 +45,6 @@ import {mapState} from 'vuex'
 import BrandCom from '../../components/cinemaSetCom/brandCom'
 import ServiceCom from '../../components/cinemaSetCom/serviceCom'
 import SetCom from '../../components/cinemaSetCom/setCom.vue'
-
 export default {
   components:{
     'setCom':SetCom,
@@ -68,8 +67,6 @@ export default {
       cityID(){
         initData()
       },
-     
-      
   },
   methods:{
       initData(){
