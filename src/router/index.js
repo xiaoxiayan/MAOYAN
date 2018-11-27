@@ -47,7 +47,6 @@ export default new Router({
         {
           path: 'cityList',
           component: CityList
-          
         },
        
       ]
@@ -60,7 +59,14 @@ export default new Router({
       name:'MovieDetails',
       path:'/movieDetails/:name/:id',
       //懒加载
-      component:()=> import('../pages/common/MovieDetails.vue')
+      component:()=> import('../pages/common/MovieDetails.vue'),
+      children: [
+        {
+          name: "cinameMovie",
+          path: "cinameMovie",
+          component: () => import('../components/cinemasMovie/cinamedetail_move.vue')
+        }
+   ]
     },
     {
       path: '**',

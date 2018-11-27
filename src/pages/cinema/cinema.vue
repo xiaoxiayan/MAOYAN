@@ -36,6 +36,8 @@
     <setCom  v-show="navIndex == 0"/>
     <BrandCom v-show="navIndex == 1"/>
     <ServiceCom v-show="navIndex == 2"/>
+    <router-view></router-view>
+    
 </div>
 </template>
 
@@ -76,7 +78,7 @@ export default {
       },
       chooseCity(){
         console.log('选择了城市')
-        this.$router.push('/cinema/cityList')
+        this.$router.push('/cinema/cityList')  
       },
       CityAction(index){
         console.log(index);
@@ -92,8 +94,6 @@ export default {
             console.log('点解了')
             this.$router.push('./MovieDetails')
     }
-      
-      
   },
   created() {
      this.initData()

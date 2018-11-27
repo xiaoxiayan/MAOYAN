@@ -73,6 +73,11 @@ forceUpdate=1543233192406 时间
 */
 const MOVIEDETAILS_CINEMAS = '/ajax/movie'
 
+
+//进入电影院详情
+
+const  CINAMEDETAIL_API = '/ajax/cinemaDetail'
+
 export default 
 {
     SAT_HOST,
@@ -86,7 +91,8 @@ export default
     SETCITY_BRAND_API,
     GET_TST_API,
     GET_MOVIEDETAILS_API,
-    MOVIEDETAILS_CINEMAS
+    MOVIEDETAILS_CINEMAS,
+    CINAMEDETAIL_API
 
 
 }

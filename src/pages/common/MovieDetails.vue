@@ -20,13 +20,29 @@
             :key = index  
             :class="{active: navIndex==index}" 
             class="CC" 
-            @click="CityAction(index)"
+            @click="CityA()"
             >{{item}}</div>
             </div> 
+              <div class="cinemas">
+              <ul>
+              <li v-for="(item,index) in cinemas" :key = item.id @click="cinemasAction(index)">
+              <div class="title">
+                <span>{{item.nm}}</span>
+                <span>{{item.sellPrice}}</span>
+                <span>元起</span>
               </div>
-      <setCom  v-show="navIndex == 0"/>
+              <div class="address"> 
+                  <span> {{item.addr}} </span>
+                    <span> {{item.distance}} </span>
+              </div>
+                   </li>
+        </ul>
+              </div>
+              </div>
+                <setCom  v-show="navIndex == 0"/>
                 <BrandCom v-show="navIndex == 1"/>
                 <ServiceCom v-show="navIndex == 2"/>
+            <router-view></router-view>
    </div>
 </template>
 
@@ -55,19 +71,21 @@ export default {
       choose:['全城','品牌','特色'],
       navIndex : null,
       sIndex : ''
+
       
     }
   },
    methods:{
-      CityAction(index){
-        console.log(index);
-        if (this.navIndex != index ){
-          this.navIndex = index
-          this.sIndex = index
-        }else{
-          this.navIndex = null
-          this.sIndex = ''   
-        }
+        CityA(){
+            console.log('点了')
+        // console.log(index);
+        // if (this.navIndex != index ){
+        //   this.navIndex = index
+        //   this.sIndex = index
+        // }else{
+        //   this.navIndex = null
+        //   this.sIndex = ''   
+        // }
       }
   },
    computed:{
@@ -76,6 +94,14 @@ export default {
   methods: {
     comback() {
       this.$router.back();
+    },
+    cinemasAction(index){
+      console.log('点击了影院',this.cinemas)
+      let movieId = this.$route.params.id
+      let day = new Date();
+			let dat = day.toLocaleDateString().replace(/\//g, '-');
+//				console.log(dat)
+			this.$router.push({name: 'cinameMovie',query: {movieId: movieId,data: dat,cinameId: this.cinemas[index].id,pri: this.cinemas[index].sellPrice}})
     }
   },
   created() {
@@ -87,6 +113,7 @@ export default {
     });
     movieDetailsCinemas(this.cityID,this.id).then(result=>{
         this.cinemas = result.cinemas
+        console.log(this.cinemas)
     })
   }
 };
@@ -143,6 +170,9 @@ export default {
         transform:translateY(-50%) 
     }
   }
+  .details-cinemas{
+
+
   .choose {
   width: 100%;
   height: 44px;
@@ -164,6 +194,21 @@ export default {
       transform: translateY(4px);
     }
   }
+}
+.cinemas{
+  position: absolute;
+  top:322px;
+      li {
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid #e6e6e6;
+    .title {
+      line-height: 23px;
+      font-size: 16px;
+      color: #000;
+    }
+  }
+}
 }
 }
 </style>

@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-
 <router-view></router-view>
-
-
     <tabs v-model="selectIndex">
     <tab-item v-for="(tabItem, index) in tabList" :key="index"
         :name="tabItem.name" :icon="tabItem.icon">

@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -20,16 +21,16 @@
   },
   "vue": {
     "devServer": {
-        "proxy": {
-            "/ajax": {
-                "target": "http://m.maoyan.com",
-                "changeOrigin": true
-            },
-            "/dianying": {
-              "target": "http://m.maoyan.com",
-              "changeOrigin": true
-            }
+      "proxy": {
+        "/ajax": {
+          "target": "http://m.maoyan.com",
+          "changeOrigin": true
+        },
+        "/dianying": {
+          "target": "http://m.maoyan.com",
+          "changeOrigin": true
         }
+      }
     }
   }
 }

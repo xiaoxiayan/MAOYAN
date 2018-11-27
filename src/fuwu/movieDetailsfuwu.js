@@ -52,6 +52,7 @@ export function movieDetailsCinemas(cid,movieid){
 //获取详情页 点入 电影院的数据，传入电影ID，传入影院ID
   export function cinameDet(mid, cid){
     return new Promise((resolve, reject)=>{
+        console.log(API.CINAMEDETAIL_API)
         http({
             url: API.CINAMEDETAIL_API,
             method: 'GET',
