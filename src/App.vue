@@ -31,7 +31,7 @@ export default {
       let path = this.tabList[newVal].path;
       this.$router.push(path);
     }
-  } 
+  }
 }
   
 </script>

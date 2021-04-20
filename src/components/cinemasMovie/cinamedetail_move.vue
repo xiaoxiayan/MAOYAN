@@ -60,6 +60,7 @@ import { cinameDet } from '../../fuwu/movieDetailsfuwu.js'
 import cin from '../../common/cin'
 import bmh from '../../common/bmh'
 import Swiper from 'swiper'
+import 'swiper/swiper-bundle.css'
 export default {
 //	porps: {
 //		movieId: Number,
@@ -119,7 +120,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../node_modules/swiper/dist/css/swiper.css";
+// @import "../../../node_modules/swiper/dist/css/swiper.css";
 .cinamedetail {
 	width: 100%;
 	position: absolute;
